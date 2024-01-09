@@ -1,16 +1,19 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
-import Dashboard from './pages/Dashboard'; 
-import Login from './pages/Login'; 
-import {Route,Routes} from 'react-router-dom';
-import TRoute from './Route/TRoute';
+
+
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import EmployeeManagement from './pages/EmployeeManagement';
+
 const App = () => {
   return (
     <div>
-      <h1>Your App Title</h1>
-      <Dashboard />
-     <Login/>
+      <h1>Employee Management System</h1>
+   <Profile/>
+    
+    
     </div>
   );
 };

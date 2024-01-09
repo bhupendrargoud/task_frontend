@@ -1,0 +1,76 @@
+/* Profile.css */
+
+.employee-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  .employee-info {
+    margin-bottom: 30px;
+    text-align: left;
+   
+    
+  }
+  .payment-history {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #78fcec;
+  }
+  
+  .total {
+    font-weight: bold;
+  }
+  
+  /* Additional Styling for Employee Information */
+  .employee-info p {
+    margin: 10px 0;
+  }
+  
+  /* Style the list of employees in App component */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  li:hover {
+    background-color: #ccc;
+  }
+  
