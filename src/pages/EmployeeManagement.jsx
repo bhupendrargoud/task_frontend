@@ -1,5 +1,5 @@
 
-// EmployeeManagement.jsx
+// EmployeeManagement
 
 import React, { useState } from 'react';
 import '../style/EmployeeManagement.css'
