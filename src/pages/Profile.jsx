@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../style/Profile.css';
 
 const Profile = ({ employee, paymentHistory, onUpdateDetails }) => {
   const [updatedAddress, setUpdatedAddress] = useState('');
+  const location = useLocation();
+
+  // Extract userId from URL parameter when the component mounts
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const userId = searchParams.get('userId');
+    console.log('User ID from URL:', userId);
+  }, [location.search]);
 
   const handleUpdateDetails = () => {
     // You can implement the logic to update details here
     // For example, you might open a modal or navigate to a form for updating details
-    onUpdateDetails(updatedAddress);
+    onUpdateDetails(employee.id, updatedAddress);
   };
 
   return (
@@ -19,7 +28,10 @@ const Profile = ({ employee, paymentHistory, onUpdateDetails }) => {
         <p><strong>Position:</strong> {employee.position}</p>
         <p><strong>Email:</strong> {employee.email}</p>
         <p><strong>Address:</strong> {employee.address}</p>
-       
+
+        {/* Display user ID from URL parameter */}
+        <p><strong>User ID:</strong> {location.search && new URLSearchParams(location.search).get('userId')}</p>
+
         <button onClick={handleUpdateDetails}>Update Details</button>
       </div>
 
@@ -47,49 +59,10 @@ const Profile = ({ employee, paymentHistory, onUpdateDetails }) => {
       </div>
     </div>
   );
-}
+};
 
 const calculateTotal = (payments) => {
   return payments.reduce((total, payment) => total + payment.amount, 0);
-}
+};
 
-const App = () => {
-  const [employees, setEmployees] = useState([
-    {
-      id: 'JD-1',
-      fullName: 'John Doe',
-      position: 'Software Engineer',
-      email: 'john.doe@example.com',
-      address: '123 Main St, City, Country', // Added Address
-    },
-  ]);
-
-  const handleUpdateDetails = (employeeId, updatedAddress) => {
-    // You can implement the logic to update the employee details
-    // For example, update the state or make an API call to update the data
-    const updatedEmployees = employees.map(emp =>
-      emp.id === employeeId ? { ...emp, address: updatedAddress } : emp
-    );
-    setEmployees(updatedEmployees);
-  };
-
-  return (
-    <div>
-      {employees.map(employee => (
-        <Profile
-          key={employee.id}
-          employee={employee}
-          paymentHistory={[
-            { date: '2022-01-01', description: 'Salary', amount: 5000.00 },
-            { date: '2022-02-01', description: 'Bonus', amount: 1000.00 },
-            { date: '2022-03-01', description: 'Salary', amount: 5200.00 },
-            // Add payment history data for the selected employee as needed
-          ]}
-          onUpdateDetails={(updatedAddress) => handleUpdateDetails(employee.id, updatedAddress)}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default App;
+export default Profile;

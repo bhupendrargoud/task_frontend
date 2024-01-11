@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import '../style/Login.css'; // Import the CSS file
+import { useHistory } from 'react-router-dom';
+import '../style/Login.css'; 
 
 const Login = () => {
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Add your login logic here
-    console.log('Employee ID:', employeeId);
-    console.log('Password:', password);
+  const history = useHistory();
+  const handleLogin = () => {
+    
+    history.push('/profile/userId/'+2);
+    window.location.reload();
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h2>Employee Login</h2>
-        <form onSubmit={handleLogin}>
+        <dev >
           <label htmlFor="employeeId">Employee ID:</label>
           <input
             type="text"
@@ -37,9 +37,9 @@ const Login = () => {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit" onClick={handleLogin}>Login</button>
           
-        </form>
+        </dev>
       </div>
     </div>
   );

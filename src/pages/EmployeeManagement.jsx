@@ -1,56 +1,105 @@
+import React, { useState, useEffect } from 'react';
+import '../style/EmployeeManagement.css';
 
-// EmployeeManagement
-
-import React, { useState } from 'react';
-import '../style/EmployeeManagement.css'
 const EmployeeManagement = () => {
-  // Mock data for employee list
-  const [employees, setEmployees] = useState([
-    { id: 'JD-1', fullName: 'John Doe', position: 'Software Engineer', email: 'john.doe@example.com' },
-    { id: 'JS-2', fullName: 'Jane Smith', position: 'Product Manager', email: 'jane.smith@example.com' },
-    // Add more employees as needed
-  ]);
+  const [employees, setEmployees] = useState([]);
 
+  // State for new employee input
   const [newEmployee, setNewEmployee] = useState({
     firstName: '',
     lastName: '',
     position: '',
   });
 
-  const handleRemoveEmployee = (employeeId) => {
-    // Remove the employee with the given ID from the list
-    const updatedEmployees = employees.filter((employee) => employee.id !== employeeId);
-    setEmployees(updatedEmployees);
+  // Fetch data from the API when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/employees/all');
+        const data = await response.json();
+        setEmployees(data);
+      } catch (error) {
+        console.error('Error fetching data from API:', error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+  const handleRemoveEmployee = async (Id) => {
+    
+    try {
+      // Make a DELETE request to the API to remove the employee
+      const response = await fetch(`http://localhost:8080/api/employees/delete/${Id}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to remove employee: ${response.statusText}`);
+      }
+  
+      // If the request is successful, update the state to remove the deleted employee
+      setEmployees((prevEmployees) => prevEmployees.filter((employee) => employee.id !== Id));
+  
+    } catch (error) {
+      console.error('Error removing employee:', error);
+    }
   };
-
-  const handleAddEmployee = () => {
-    // Generate employee ID and email based on first name, last name, and count
-    const count = employees.length + 1;
-    const employeeId = `${newEmployee.firstName.charAt(0).toUpperCase()}${newEmployee.lastName.charAt(0).toUpperCase()}-${count}`;
-    const employeeEmail = `${newEmployee.firstName.toLowerCase()}.${newEmployee.lastName.toLowerCase()}@example.com`;
-
-    // Add the new employee to the list
-    setEmployees((prevEmployees) => [
-      ...prevEmployees,
-      {
-        id: employeeId,
-        fullName: `${newEmployee.firstName} ${newEmployee.lastName}`,
+  const handleAddEmployee = async () => {
+    try {
+      // Generate employee email based on first name and last name
+      const employeeEmail = `${newEmployee.firstName.toLowerCase()}.${newEmployee.lastName.toLowerCase()}@example.com`;
+      const employeeId = `${newEmployee.firstName.charAt(0).toUpperCase()}${newEmployee.lastName.charAt(0).toUpperCase()}`;
+      // Prepare the new employee data
+      const newEmployeeData = {
+        employeeId: employeeId,
+        name: `${newEmployee.firstName} ${newEmployee.lastName}`,
         position: newEmployee.position,
         email: employeeEmail,
-      },
-    ]);
-
-    // Clear the form fields
-    setNewEmployee({
-      firstName: '',
-      lastName: '',
-      position: '',
-    });
+      };
+  
+      // Make a POST request to the API to save the new employee
+      const response = await fetch('http://localhost:8080/api/employees/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEmployeeData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to save employee: ${response.statusText}`);
+      }
+  
+      // If the request is successful, update the state with the new employee
+      const savedEmployee = await response.json();
+  
+      setEmployees((prevEmployees) => [
+        ...prevEmployees,
+        {
+          id: savedEmployee.employeeId, 
+          name: savedEmployee.name,
+          position: savedEmployee.position,
+          email: savedEmployee.email,
+        },
+      ]);
+  
+      // Clear the form fields
+      setNewEmployee({
+        firstName: '',
+        lastName: '',
+        position: '',
+      });
+  
+    } catch (error) {
+      console.error('Error saving employee:', error);
+    }
   };
+  
 
   return (
     <div className="container">
-      <h1>Employee Management Dash bord</h1>
+      <h1>Employee Management Dashboard</h1>
 
       <div className="employee-list-container">
         <div className="employee-list">
@@ -58,7 +107,7 @@ const EmployeeManagement = () => {
           <table>
             <thead>
               <tr>
-                <th>ID</th>
+                <th>EmployeeID</th>
                 <th>Full Name</th>
                 <th>Position</th>
                 <th>Email</th>
@@ -68,8 +117,8 @@ const EmployeeManagement = () => {
             <tbody>
               {employees.map((employee) => (
                 <tr key={employee.id}>
-                  <td>{employee.id}</td>
-                  <td>{employee.fullName}</td>
+                  <td>{employee.employeeId}</td>
+                  <td>{employee.name}</td>
                   <td>{employee.position}</td>
                   <td>{employee.email}</td>
                   <td>
