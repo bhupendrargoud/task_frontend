@@ -1,17 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
+import React, { useState } from 'react';
+
+import { BrowserRouter as Router, Route, Switch ,Redirect} from 'react-router-dom';
+import Login from '../pages/Login';
+import Profile from '../pages/Profile'
+import EmployeeManagement from '../pages/EmployeeManagement'
+
 
 const Navigation = () => {
+  const [loggedInData, setLoggedInData] = useState(null);
   return (
-    <nav>
-      <ul>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/employee-management">Employee Management</Link></li>
-        <li><Link to="/profile-settings">Profile Settings</Link></li>
-        <li><Link to="/system-settings">System Settings</Link></li>
-      </ul>
-    </nav>
+    <Router>
+    <div>
+      <Switch>
+        <Route path="/login">
+          <Login onLogin={(data) => setLoggedInData(data)} />
+        </Route>
+        <Route path="/profile">
+          {loggedInData ? (
+            <Profile employeeId={loggedInData.employeeId} />
+          ) : (
+          
+            <Redirect to="/login" />
+          )}
+        </Route>
+        <Route path="/employeem" component={EmployeeManagement} />
+       
+      </Switch>
+    </div>
+  </Router>
+  
   );
 };
 

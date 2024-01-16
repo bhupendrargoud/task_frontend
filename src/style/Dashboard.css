@@ -1,109 +1,35 @@
-/* styles.css */
+/* Dashboard.css */
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ddf4c1;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  
-  .container {
-    max-width: 1200px; /* Increased max-width to accommodate side-by-side layout */
-    display: flex;
-    flex-direction: column; /* Main container is a column */
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  h1, h2 {
-    color: #333;
-  }
-  
-  .employee-list-container {
-    display: flex;
-    justify-content: space-between; /* Items are spaced evenly */
-    width: 100%; /* Take full width of the container */
-  }
-  
-  .employee-list,
-  .add-employee {
-    flex-basis: 48%; /* Each container takes approximately half of the space */
-    background-color: #a6ffa3;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
 
+header {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+button {
+  background: #61dafb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
 
+section {
+  padding: 2rem;
+}
 
-  
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #4caf50;
-    color: #fff;
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  button {
-    background-color: #61dafb;
-    color: #fff;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #4fa3d1;
-  }
-  
-  .add-employee {
-    background-color: #e6f7ff; /* Light blue for the add employee row */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 8px;
-    color: #555;
-  }
-  
-  input {
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  /* Other styles as needed */
-  
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

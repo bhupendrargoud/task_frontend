@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import '../style/Profile.css';
 
-const Profile = ({ employee, paymentHistory, onUpdateDetails }) => {
-  const [updatedAddress, setUpdatedAddress] = useState('');
-  const location = useLocation();
+const Profile = ({ employeeId }) => {
+  const [employee, setEmployee] = useState({});
+  const [paymentHistory, setPaymentHistory] = useState([]);
 
-  // Extract userId from URL parameter when the component mounts
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const userId = searchParams.get('userId');
-    console.log('User ID from URL:', userId);
-  }, [location.search]);
+    const fetchEmployeeData = async () => {
+      try {
+        // Assuming an API endpoint for fetching employee data by ID
+        const response = await fetch(`http://localhost:8080/api/employees/search/eid/${employeeId}`);
+        const data = await response.json();
+        setEmployee(data);
+      } catch (error) {
+        console.error('Error fetching employee data:', error);
+        // You might set an error state for user feedback
+      }
+    };
 
-  const handleUpdateDetails = () => {
-    // You can implement the logic to update details here
-    // For example, you might open a modal or navigate to a form for updating details
-    onUpdateDetails(employee.id, updatedAddress);
-  };
+    const fetchPaymentHistory = async () => {
+      try {
+        // You can include logic to fetch payment history based on employeeId if needed
+        // For now, using dummy data
+        const data = [
+          { date: '2022-01-01', description: 'Salary', amount: 5000.00 },
+          { date: '2022-02-01', description: 'Bonus', amount: 1000.00 },
+          { date: '2022-03-01', description: 'Salary', amount: 5200.00 },
+        ];
+        setPaymentHistory(data);
+      } catch (error) {
+        console.error('Error fetching payment history:', error);
+        // You might set an error state for user feedback
+      }
+    };
+
+    fetchEmployeeData();
+    fetchPaymentHistory();
+  }, [employeeId]);
 
   return (
     <div className="employee-details-container">
@@ -28,11 +47,6 @@ const Profile = ({ employee, paymentHistory, onUpdateDetails }) => {
         <p><strong>Position:</strong> {employee.position}</p>
         <p><strong>Email:</strong> {employee.email}</p>
         <p><strong>Address:</strong> {employee.address}</p>
-
-        {/* Display user ID from URL parameter */}
-        <p><strong>User ID:</strong> {location.search && new URLSearchParams(location.search).get('userId')}</p>
-
-        <button onClick={handleUpdateDetails}>Update Details</button>
       </div>
 
       <div className="payment-history">

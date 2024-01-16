@@ -1,23 +1,14 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
-import Profile from './pages/test'
-import EmployeeManagement from './pages/EmployeeManagement'
+import Navigation from './components/Navigation';
+
 
 
 const App = () => {
   return (
-    <Router>
-    <div>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/profile/:userId" component={Profile} />
-        <Route path="/employeem" component={EmployeeManagement} />
-      </Switch>
-    </div>
-  </Router>
+   <Navigation/>
+  
 
   );
 };
