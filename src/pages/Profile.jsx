@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import '../style/Profile.css';
+import { useParams } from 'react-router-dom';
 
-const Profile = ({ employeeId }) => {
+
+const Profile = () => {
   const [employee, setEmployee] = useState({});
   const [paymentHistory, setPaymentHistory] = useState([]);
+  const { employeeId } = useParams();
+  
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
+     
       try {
-        // Assuming an API endpoint for fetching employee data by ID
+       
         const response = await fetch(`http://localhost:8080/api/employees/search/eid/${employeeId}`);
         const data = await response.json();
         setEmployee(data);
+        
       } catch (error) {
         console.error('Error fetching employee data:', error);
-        // You might set an error state for user feedback
+      
       }
     };
 
     const fetchPaymentHistory = async () => {
       try {
-        // You can include logic to fetch payment history based on employeeId if needed
-        // For now, using dummy data
+   
         const data = [
           { date: '2022-01-01', description: 'Salary', amount: 5000.00 },
           { date: '2022-02-01', description: 'Bonus', amount: 1000.00 },
@@ -30,7 +35,7 @@ const Profile = ({ employeeId }) => {
         setPaymentHistory(data);
       } catch (error) {
         console.error('Error fetching payment history:', error);
-        // You might set an error state for user feedback
+     
       }
     };
 
@@ -42,8 +47,8 @@ const Profile = ({ employeeId }) => {
     <div className="employee-details-container">
       <div className="employee-info">
         <h1>Employee Information</h1>
-        <p><strong>Name:</strong> {employee.fullName}</p>
-        <p><strong>Employee ID:</strong> {employee.id}</p>
+        <p><strong>Name:</strong> {employee.name}</p>
+        <p><strong>Employee ID:</strong> {employee.employeeId}</p>
         <p><strong>Position:</strong> {employee.position}</p>
         <p><strong>Email:</strong> {employee.email}</p>
         <p><strong>Address:</strong> {employee.address}</p>
@@ -64,12 +69,12 @@ const Profile = ({ employeeId }) => {
               <tr key={index}>
                 <td>{payment.date}</td>
                 <td>{payment.description}</td>
-                <td>${payment.amount.toFixed(2)}</td>
+                <td>Rs {payment.amount.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p className="total">Total Payment: ${calculateTotal(paymentHistory).toFixed(2)}</p>
+        <p className="total">Total Payment: Rs{calculateTotal(paymentHistory).toFixed(2)}</p>
       </div>
     </div>
   );

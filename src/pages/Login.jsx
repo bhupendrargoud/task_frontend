@@ -9,23 +9,31 @@ const Login = ({ onLogin }) => {
   const history = useHistory();
 
   const handleLogin = async () => {
-    // Check for specific dummy credentials
-    if (employeeId === 'MK-3' && password === 'p') {
-      try {
-        const data = {
-          
-          employeeId: employeeId,
-         
+    try {
+      const response = await fetch(`http://localhost:8080/api/employees/login/${employeeId}/${password}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        if(data.employeeId==="AD-01")
+        {
+          history.push(`/employeemanagement`);
+          window.location.reload();
         }
-        onLogin(data); // Pass the employee data to the parent component
-        history.push('/profile'); // Navigate to the profile page
-        
-      } catch (error) {
-        console.error('Error during login:', error);
+        else{
+       
+        const employeeId = data.employeeId;
+        history.push(`/profile/${employeeId}`); 
+        window.location.reload();
       }
-    } else {
-      // Handle incorrect credentials (you might want to display an error message)
-      console.error('Incorrect username or password');
+      } else if (response.status === 401) {
+        alert('Incorrect password');
+      } else if (response.status === 404) {
+        alert('Employee not found');
+      } else {
+        console.error('Error during login:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
     }
   };
 

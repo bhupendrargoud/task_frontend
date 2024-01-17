@@ -4,7 +4,7 @@ import '../style/EmployeeManagement.css';
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([]);
 
-  // State for new employee input
+
   const [newEmployee, setNewEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -48,17 +48,18 @@ const EmployeeManagement = () => {
   const handleAddEmployee = async () => {
     try {
       // Generate employee email based on first name and last name
-      const employeeEmail = `${newEmployee.firstName.toLowerCase()}.${newEmployee.lastName.toLowerCase()}@example.com`;
+      const employeeEmail = `${newEmployee.firstName.toLowerCase()}.${newEmployee.lastName.toLowerCase()}@gavika.com`;
       const employeeId = `${newEmployee.firstName.charAt(0).toUpperCase()}${newEmployee.lastName.charAt(0).toUpperCase()}`;
-      // Prepare the new employee data
+      const name = `${newEmployee.firstName.toUpperCase()} ${newEmployee.lastName.toUpperCase()}`;
+
       const newEmployeeData = {
         employeeId: employeeId,
-        name: `${newEmployee.firstName} ${newEmployee.lastName}`,
+        name: name,
         position: newEmployee.position,
         email: employeeEmail,
       };
   
-      // Make a POST request to the API to save the new employee
+   
       const response = await fetch('http://localhost:8080/api/employees/save', {
         method: 'POST',
         headers: {
@@ -71,7 +72,7 @@ const EmployeeManagement = () => {
         throw new Error(`Failed to save employee: ${response.statusText}`);
       }
   
-      // If the request is successful, update the state with the new employee
+   
       const savedEmployee = await response.json();
   
       setEmployees((prevEmployees) => [
