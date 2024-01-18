@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch ,withRouter } from 'react-router
 import Login from '../pages/Login';
 import Profile from '../pages/Profile'
 import EmployeeManagement from '../pages/EmployeeManagement'
-import Header from './Header';
+
 
 
 
@@ -15,7 +15,6 @@ const Navigation = () => {
         
         
         <Route path="/profile/:employeeId" exact component={Profile} />
-        <Route path="/header" Component={Header}/>
         <Route path="/employeemanagement" component={withRouter(EmployeeManagement)} />
         <Route path="/" component={Login}/>
       </Switch>
