@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../style/EmployeeManagement.css';
+import { useHistory } from 'react-router-dom';
 
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([]);
 
-
+  const history = useHistory();
   const [newEmployee, setNewEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -25,6 +26,12 @@ const EmployeeManagement = () => {
 
     fetchData();
   }, []); 
+
+  const handleLogout = () => {
+    history.push('/');
+    window.location.reload();
+  };
+  
 
   const handleRemoveEmployee = async (Id) => {
     
@@ -131,9 +138,13 @@ const EmployeeManagement = () => {
               ))}
             </tbody>
           </table>
+          
         </div>
 
         <div className="add-employee">
+        <button type="button" onClick={handleLogout}>
+              Logout
+            </button>
           <h2>Add Employee</h2>
           <form>
             <label htmlFor="employeeFirstName">First Name:</label>
@@ -170,7 +181,9 @@ const EmployeeManagement = () => {
               Add Employee
             </button>
           </form>
+       
         </div>
+        
       </div>
     </div>
   );

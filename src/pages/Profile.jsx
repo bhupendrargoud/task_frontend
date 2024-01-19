@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../style/Profile.css';
-import { useParams } from 'react-router-dom';
+import { useParams ,useHistory } from 'react-router-dom';
 
 
 const Profile = () => {
   const [employee, setEmployee] = useState({});
   const [paymentHistory, setPaymentHistory] = useState([]);
   const { employeeId } = useParams();
-  
+  const history = useHistory();
+  const handleLogout = () => {
+    history.push('/');
+    window.location.reload();
+  };  
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
@@ -24,6 +28,7 @@ const Profile = () => {
       }
     };
 
+  
     const fetchPaymentHistory = async () => {
       try {
    
@@ -76,6 +81,10 @@ const Profile = () => {
         </table>
         <p className="total">Total Payment: Rs{calculateTotal(paymentHistory).toFixed(2)}</p>
       </div>
+      <button type="button" onClick={handleLogout}>
+              Logout
+            </button>
+      
     </div>
   );
 };
