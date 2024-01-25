@@ -18,7 +18,7 @@ const Profile = () => {
      
       try {
        
-        const response = await fetch(`http://localhost:8080/api/employees/search/eid/${employeeId}`);
+        const response = await fetch(`http://localhost:8088/api/employees/search/eid/${employeeId}`);
         const data = await response.json();
         setEmployee(data);
         
