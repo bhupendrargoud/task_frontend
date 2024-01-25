@@ -130,13 +130,12 @@ const EmployeeManagement = () => {
                   <td>{employee.position}</td>
                   <td>{employee.email}</td>
                   <td>
-                    if (employee.id!="AD-01") {
+                    {employee.id !== "AD-01" && (
                       <button onClick={() => handleRemoveEmployee(employee.id)}>
-                      Remove
-                    </button>
-                    }
-                    
-                  </td>
+                        Remove
+                      </button>
+                    )}
+                </td>
                 </tr>
               ))}
             </tbody>
