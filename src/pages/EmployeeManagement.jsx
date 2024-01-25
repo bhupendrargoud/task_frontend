@@ -67,7 +67,7 @@ const EmployeeManagement = () => {
       };
   
    
-      const response = await fetch('http://localhost:8080/api/employees/save', {
+      const response = await fetch('http://localhost:8088/api/employees/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -130,9 +130,12 @@ const EmployeeManagement = () => {
                   <td>{employee.position}</td>
                   <td>{employee.email}</td>
                   <td>
-                    <button onClick={() => handleRemoveEmployee(employee.id)}>
+                    if (employee.id!="AD-01") {
+                      <button onClick={() => handleRemoveEmployee(employee.id)}>
                       Remove
                     </button>
+                    }
+                    
                   </td>
                 </tr>
               ))}
