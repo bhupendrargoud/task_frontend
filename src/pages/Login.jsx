@@ -3,13 +3,32 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../style/Login.css'; 
 const Login = () => {
+  const url="http://192.168.49.2:30001/"
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const [result, setResult] = useState('');
+
+  useEffect(() => {
+    
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Server Not Found: ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        setResult(data);
+      })
+      .catch(error => {
+        setResult(`Error: ${error.message}`);
+      });
+  }, []);
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://localhost:8088/api/employees/login/${employeeId}/${password}`);
+      const response = await fetch(url+`api/employees/login/${employeeId}/${password}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -42,6 +61,7 @@ const Login = () => {
       <div className="login-box">
         <h2>Employee Login</h2>
         <dev >
+        <div>{result}</div>
         <label htmlFor="employeeId">Employee ID:</label>
       <input
         type="text"

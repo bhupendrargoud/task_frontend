@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([]);
-
+  const url="http://192.168.49.2:30001/"
   const history = useHistory();
   const [newEmployee, setNewEmployee] = useState({
     firstName: '',
@@ -16,7 +16,7 @@ const EmployeeManagement = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8088/api/employees/all');
+        const response = await fetch(url+'api/employees/all');
         const data = await response.json();
         setEmployees(data);
       } catch (error) {
@@ -37,7 +37,7 @@ const EmployeeManagement = () => {
     
     try {
       // Make a DELETE request to the API to remove the employee
-      const response = await fetch(`http://localhost:8080/api/employees/delete/${Id}`, {
+      const response = await fetch(url+`api/employees/delete/${Id}`, {
         method: 'DELETE',
       });
   
@@ -67,7 +67,7 @@ const EmployeeManagement = () => {
       };
   
    
-      const response = await fetch('http://localhost:8088/api/employees/save', {
+      const response = await fetch(url+'api/employees/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

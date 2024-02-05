@@ -4,6 +4,7 @@ import { useParams ,useHistory } from 'react-router-dom';
 
 
 const Profile = () => {
+  const url="http://192.168.49.2:30001/"
   const [employee, setEmployee] = useState({});
   const [paymentHistory, setPaymentHistory] = useState([]);
   const { employeeId } = useParams();
@@ -18,7 +19,7 @@ const Profile = () => {
      
       try {
        
-        const response = await fetch(`http://localhost:8088/api/employees/search/eid/${employeeId}`);
+        const response = await fetch(url+`api/employees/search/eid/${employeeId}`);
         const data = await response.json();
         setEmployee(data);
         
