@@ -61,7 +61,8 @@ const Login = () => {
       <div className="login-box">
         <h2>Employee Login</h2>
         <dev >
-        <div>{result}</div>
+        
+        
         <label htmlFor="employeeId">Employee ID:</label>
       <input
         type="text"

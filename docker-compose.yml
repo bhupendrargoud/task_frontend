@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile
     image: my-node-app
     ports:
-      - "80:80"
+      - "88:80"

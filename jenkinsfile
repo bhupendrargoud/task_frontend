@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Debug') {
+            steps {
+                script {
+                    // Print workspace and check the directory
+                    echo "Workspace: ${WORKSPACE}"
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image
+                    sh "docker build -t bhupendrargoud/node-app ../frontend/"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push Docker image
+                    sh "docker push bhupendrargoud/node-app:latest"
+                }
+            }
+        }
+
+        stage('Deploy jar on k8s') {
+            steps {
+                withKubeConfig(credentialsId: 'minikube', serverUrl: 'https://192.168.49.2:8443') {
+                    sh "kubectl apply -f ../frontend/nginx-deployment.yaml"
+                    
+                }
+            }
+        }
+    }
+}
+
+
