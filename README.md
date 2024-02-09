@@ -2,15 +2,15 @@
 
 ## Frontend Deployment
 Please ensure that the backend deployment is completed before proceeding with the frontend deployment.
-### [Link to Backend Deployment](https://github.com/gavika/reference-app-payroll-backend.git)
+### [ Backend Deployment](https://github.com/gavika/reference-app-payroll-backend.git)
 
 
 ### Installing Node.js and React
 
 ```bash
 sudo apt update
-sudo apt install nodejs
-sudo apt install npm
+sudo apt install nodejs -y
+sudo apt install npm -y
 
 ```
 ### Jenkins Configuration:
@@ -19,7 +19,7 @@ Install Node.js Plugin:
 In Jenkins, go to `Manage Jenkins" > "Manage Plugins.`
 Install the `NodeJS" plugin.`
 
-Configure Node.js in Jenkins:
+Configure Node.js in Jenkins:  
 Go to `Manage Jenkins" > "Global Tool Configuration.`
 Scroll down to the `NodeJS` section.
 Click on `Add NodeJS` to add a new Node.js installation.
@@ -29,7 +29,7 @@ Click "Save" to apply the configuration.
 
 ## Create a New Jenkins Job:
 
-From the Jenkins dashboard, click on `New Item` to create a new Jenkins job.
+From the Jenkins dashboard, click on `New Item` to create a new Jenkins job.  
 Choose `Pipeline` as the job type.
 Configure Pipeline from SCM (Source Code Management):
 In the job configuration, find the `Pipeline` section.
@@ -45,7 +45,7 @@ specify credentials `git_jenkins`
 
 In the job configuration page, find the `Build Triggers` section.
 Check the box next to `Poll SCM.`
-In the `Schedule` field, enter `* * * * *`
-Save your Jenkins job configuration.
+In the `Schedule` field, enter `* * * * *`  
+Save your Jenkins job configuration.  
 
 Run the Jenkins job manually for the first time to verify that the pipeline is correctly configured.
