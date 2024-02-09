@@ -41,5 +41,11 @@ https://github.com/gavika/reference-app-payroll-frontend.git
 ```
 specify credentials `git_jenkins`
 
+#### Enable Poll SCM:
+
+In the job configuration page, find the `Build Triggers` section.
+Check the box next to `Poll SCM.`
+In the `Schedule` field, enter `* * * * *`
 Save your Jenkins job configuration.
+
 Run the Jenkins job manually for the first time to verify that the pipeline is correctly configured.
