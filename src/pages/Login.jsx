@@ -1,5 +1,5 @@
 
-import React, { useState , useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../style/Login.css'; 
 const Login = () => {
@@ -7,24 +7,8 @@ const Login = () => {
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  const [result, setResult] = useState('');
+  
 
-  useEffect(() => {
-    
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Server Not Found: ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then(data => {
-        setResult(data);
-      })
-      .catch(error => {
-        setResult(`Error: ${error.message}`);
-      });
-  }, []);
 
   const handleLogin = async () => {
     try {

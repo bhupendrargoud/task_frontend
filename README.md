@@ -10,52 +10,18 @@ sudo apt install nodejs
 sudo apt install npm
 
 ```
+### Jenkins Configuration:
+Install Node.js Plugin:
 
+In Jenkins, go to `Manage Jenkins" > "Manage Plugins.`
+Install the `NodeJS" plugin.`
 
-### Clone the git repository for frontend web pages  and also downloading the dependency
+Configure Node.js in Jenkins:
+Go to `Manage Jenkins" > "Global Tool Configuration.`
+Scroll down to the `NodeJS` section.
+Click on `Add NodeJS` to add a new Node.js installation.
+Provide a name `node_20`, 
+choose the version `20.8.0`, 
+Click "Save" to apply the configuration.
 
-```
-git clone  https://github.com/gavika/reference-app-payroll-frontend.git
-cd reference-app-payroll-frontend
-```
-
-To set up the project, run the following command to install the necessary dependencies:
-
-```bash
-npm install 
-```
-### Project Structure
-```
-reference-app-payroll-frontend
-│   README.md
-│   package.json
-│   ...
-│
-└───src
-    │
-    ├───pages
-    │       # Directory for creating web pages
-    │       HomePage.jsx
-    │       EmployeePage.jsx
-    │       ...
-    │
-    ├───components
-    │       # Directory for creating routes for navigation
-    │       Navigation.jsx
-    │       ...
-    │
-    └───style
-            # Directory for creating stylesheets
-            HomePage.css
-            EmployeePage.css
-            ...
-```
-### Run the react app .
-```
-npm start
-
-```
-### Test
-
-Open any browser and paste `http://localhost:3000` to check the expected output.
-
+### Create new pipieline
