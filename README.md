@@ -24,4 +24,19 @@ Provide a name `node_20`,
 choose the version `20.8.0`, 
 Click "Save" to apply the configuration.
 
-### Create new pipieline
+## Create a New Jenkins Job:
+
+From the Jenkins dashboard, click on `New Item` to create a new Jenkins job.
+Choose `Pipeline` as the job type.
+Configure Pipeline from SCM (Source Code Management):
+In the job configuration, find the `Pipeline` section.
+Choose `Pipeline script from SCM` as the Definition.
+Select `Git` as the SCM.
+Enter the URL 
+```bash
+https://github.com/gavika/reference-app-payroll-frontend.git
+```
+specify credentials `git_jenkins`
+
+Save your Jenkins job configuration.
+Run the Jenkins job manually for the first time to verify that the pipeline is correctly configured.

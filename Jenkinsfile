@@ -47,7 +47,7 @@ pipeline {
             steps {
                 withKubeConfig(credentialsId: 'minikube', serverUrl: 'https://192.168.49.2:8443') {
                     sh "kubectl apply -f nginx-deployment.yaml"
-                    sh "kubectl apply -f node-service.yaml.yaml"
+                    sh "kubectl apply -f node-service.yaml"
                     
                 }
             }
