@@ -31,6 +31,7 @@ Click "Save" to apply the configuration.
 
 From the Jenkins dashboard, click on `New Item` to create a new Jenkins job.  
 Choose `Pipeline` as the job type.
+Ener the name `Frontend_pipeline`
 Configure Pipeline from SCM (Source Code Management):
 In the job configuration, find the `Pipeline` section.
 Choose `Pipeline script from SCM` as the Definition.
